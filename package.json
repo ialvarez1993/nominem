@@ -1,0 +1,10 @@
+{
+  "name": "locationservice-test",
+  "type": "module",
+  "dependencies": {
+    "node-cache": "^5.1.2",
+    "nominatim-client": "^3.2.1",
+    "p-limit": "^6.1.0",
+    "p-queue": "^8.0.1"
+  }
+}
