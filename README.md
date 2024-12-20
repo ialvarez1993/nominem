@@ -1,4 +1,4 @@
-# undefined
+# Local Geocoding Service
 
 ## Table of Contents
 

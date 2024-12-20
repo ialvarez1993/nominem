@@ -1,6 +1,6 @@
 import Nominatim from "nominatim-client";
-import NodeCache from 'node-cache';
 import PQueue from 'p-queue';
+import NodeCache from 'node-cache';
 
 const cache = new NodeCache({ stdTTL: 600 }); // Cache for 10 minutes
 
@@ -18,17 +18,21 @@ const optionsTemplate = {
 };
 
 async function geocodeAddress(query) {
-    const cacheKey = `geocode_${query}`;
-    const cachedResult = cache.get(cacheKey);
-
-    if (cachedResult) {
-        return cachedResult;
-    }
+    const cacheKey = `geocode_${query}`; // Create key by query
+    const cachedResult = cache.get(cacheKey); // get the result from key
 
     const options = { ...optionsTemplate, q: query };
-    const response = await client.search(options);
-    cache.set(cacheKey, response);
-    return response;
+
+    try {
+        if (cachedResult) { // If result exist return it
+            return cachedResult;
+        }
+        const response = await client.search(options);
+        cache.set(cacheKey, response); // If not set result in cache
+        return response;
+    } catch (error) {
+        throw new Error('Error in geocodeAddress: ' + error.message);
+    }
 }
 
 // Example data array
