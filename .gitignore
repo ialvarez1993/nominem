@@ -182,3 +182,5 @@ dist
 
 south-america-latest.osm.pbf
 /data/flatnode/*.file
+/data/db/postgresql
+postgresql
