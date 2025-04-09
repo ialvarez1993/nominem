@@ -1,0 +1,18 @@
+services:
+  nominatim:
+    image: mediagis/nominatim:5.1
+    container_name: nominatim-compose
+    shm_size: 1g
+    environment:
+      PBF_URL: https://download.geofabrik.de/south-america/venezuela-latest.osm.pbf
+      REPLICATION_URL: https://download.geofabrik.de/south-america/venezuela-updates/
+      NOMINATIM_PASSWORD: volumes-undated-childhood-hemstitch-failing
+      IMPORT_WIKIPEDIA: false
+      THREADS: 4
+    volumes:
+      - nominatim-data:/var/lib/postgresql/16/main
+    ports:
+      - "8080:8080"
+
+volumes:
+  nominatim-data:
